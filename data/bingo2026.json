@@ -1,0 +1,351 @@
+{
+  "title": "MoonCity Con",
+  "subtitle": "A Meeple Among Us",
+  "year": 2026,
+  "columns": ["G", "A", "M", "E", "S"],
+  "card": [
+    [
+      {
+        "id": 1,
+        "text": "High Five a volunteer in the Library",
+
+        "kind": "normal",
+
+        "completed": false,
+
+        "icon": "",
+
+        "unlock": null
+      },
+
+      {
+        "id": 2,
+        "text": "Find someone who hates coffee (and commiserate with them about the joyless life they lead",
+
+        "kind": "normal",
+
+        "completed": false,
+
+        "icon": "",
+
+        "unlock": null
+      },
+
+      {
+        "id": 3,
+        "text": "Post a pic on Facebook playing a non PTW Title w/ #MCC2026Bingo",
+
+        "kind": "normal",
+
+        "completed": false,
+
+        "icon": "",
+
+        "unlock": null
+      },
+
+      {
+        "id": 4,
+        "text": "Find a game to play using the discord channel: MCC2026players-wanted(answer or add a post)",
+
+        "kind": "normal",
+
+        "completed": false,
+
+        "icon": "",
+
+        "unlock": null
+      },
+
+      {
+        "id": 5,
+        "text": "Find a game being played (or play one) that was published before 2010",
+
+        "kind": "normal",
+
+        "completed": false,
+
+        "icon": "",
+
+        "unlock": null
+      }
+
+    ],
+    
+    [
+      {
+        "id": 6,
+        "text": "Play a game with no text (outside of the rulebook)",
+
+        "kind": "normal",
+
+        "completed": false,
+
+        "icon": "",
+
+        "unlock": null
+      },
+
+      {
+        "id": 7,
+        "text": "Find someone who is wearing / using MCC swag from before 2026 - post a pic on Facebook of item w/ #MCCSwag",
+
+        "kind": "normal",
+
+        "completed": false,
+
+        "icon": "",
+
+        "unlock": null
+      },
+
+      {
+        "id": 8,
+        "text": "Find someone playing a game with a Dragon on the cover or on a piece or a card - name the game on MCC2026 Discord Channel",
+
+        "kind": "normal",
+
+        "completed": false,
+
+        "icon": "",
+
+        "unlock": null
+      },
+
+      {
+        "id": 9,
+        "text": "Post a pic of one of our vendors talking to an attendee on Facebook w/ #MCC2026VendorTables",
+
+        "kind": "normal",
+
+        "completed": false,
+
+        "icon": "",
+
+        "unlock": null
+      },
+
+      {
+        "id": 10,
+        "text": "MCC 2026 Riddle #3",
+
+        "kind": "riddle",
+
+        "completed": false,
+
+        "icon": "🔒",
+
+        "unlock": {
+            "riddle": 3
+        }
+      }
+
+    ],
+
+    [
+      {
+        "id": 11,
+        "text": "Exchange your vendor raffle ticket with someone you just met - note the # you gave away on Discord Channel MCC2026-vendor-raffle",
+
+        "kind": "normal",
+
+        "completed": false,
+
+        "icon": "",
+
+        "unlock": null
+      },
+
+      {
+        "id": 12,
+        "text": "Ask for a recommendation from a random person in the library. Tag on Facebook w/ #MCC2026-Title of game and if you're going to play it!",
+
+        "kind": "normal",
+
+        "completed": false,
+
+        "icon": "",
+
+        "unlock": null
+      },
+
+      {
+        "id": 13,
+        "text": "MCC 2026 Riddle #1",
+
+        "kind": "riddle",
+
+        "completed": false,
+
+        "icon": "🔒",
+
+        "unlock": {
+            "riddle": 1
+        }
+      },
+
+      {
+        "id": 14,
+        "text": "Post a pic on Facebook of the cookie you (or someone else) got w/ #MCC2026ConCookies",
+
+        "kind": "normal",
+
+        "completed": false,
+
+        "icon": "",
+
+        "unlock": null
+      },
+
+      {
+        "id": 15,
+        "text": "Find someone who has been to each MCC (besides Rick, Ben or Katherine) - post their first name on discord channel MCC2026-everytimer",
+
+        "kind": "normal",
+
+        "completed": false,
+
+        "icon": "",
+
+        "unlock": null
+      }
+    
+    ],
+    [
+      {
+        "id": 16,
+        "text": "Post on Facebook the PTW game you MOST want to win w/ #MCC2026GameIWant",
+
+        "kind": "normal",
+
+        "completed": false,
+
+        "icon": "",
+
+        "unlock": null
+      },
+
+      {
+        "id": 17,
+        "text": "Find a game with Metal Money - name the game on discord channel MCC2026-upgradedgames",
+
+        "kind": "normal",
+
+        "completed": false,
+
+        "icon": "",
+
+        "unlock": null
+      },
+
+      {
+        "id": 18,
+        "text": "Find someon who has never played a train game (NEVER EVER)",
+
+        "kind": "normal",
+
+        "completed": false,
+
+        "icon": "",
+
+        "unlock": null
+      },
+
+      {
+        "id": 19,
+        "text": "Play a game with someone you just met - what game? would you play again?",
+
+        "kind": "normal",
+
+        "completed": false,
+
+        "icon": "",
+
+        "unlock": null
+      },
+
+      {
+        "id": 20,
+        "text": "Take a picture of a dexerity game being played - and post on Facebook w/ #MCC2026-Dexterity+20",
+
+        "kind": "normal",
+
+        "completed": false,
+
+        "icon": "",
+
+        "unlock": null
+      }
+    
+    ],
+    
+    [
+      {
+        "id": 21,
+        "text": "Take a picture of a game being played with 5 or more players. Post on Facebook with tag #MCC2026SoManyGames",
+
+        "kind": "normal",
+
+        "completed": false,
+
+        "icon": "",
+
+        "unlock": null
+      },
+
+      {
+        "id": 22,
+        "text": "Find someone who is attending a gaming convention for the first time in their life!",
+
+        "kind": "normal",
+
+        "completed": false,
+
+        "icon": "",
+
+        "unlock": null
+      },
+
+      {
+        "id": 23,
+        "text": "Get someone to teach you a drafting game you've not played before",
+
+        "kind": "normal",
+
+        "completed": false,
+
+        "icon": "",
+
+        "unlock": null
+      },
+
+      {
+        "id": 24,
+        "text": "MCC 2026 Riddle #2",
+
+        "kind": "riddle",
+
+        "completed": false,
+
+        "icon": "🔒",
+
+        "unlock": {
+            "riddle": 2
+        }
+      },
+
+      {
+        "id": 25,
+        "text": "Invite someone to sit down at your table and play a game - or find out a game they've played today. Tell us about it on discord!",
+
+        "kind": "normal",
+
+        "completed": false,
+
+        "icon": "",
+
+        "unlock": null
+      }
+    ]
+  ]
+}

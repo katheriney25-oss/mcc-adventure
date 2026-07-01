@@ -56,3 +56,59 @@ h2{
     font-size:1.1rem;
 
 }
+.app {
+    width: min(100%, 900px);
+    padding: 1rem;
+}
+
+.hero {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.bingo-card {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.4rem;
+}
+
+.bingo-header {
+    background: #d4b2ff;
+    color: #1f1730;
+    font-weight: bold;
+    font-size: 1.5rem;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    text-align: center;
+}
+
+.bingo-square {
+    min-height: 110px;
+    padding: 0.75rem;
+    border: 2px solid #d4b2ff;
+    border-radius: 0.75rem;
+    background: #2d2144;
+    color: white;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.bingo-square:hover {
+    background: #3b2b59;
+}
+
+.bingo-square.completed {
+    background: #6f35c4;
+    border-color: #f7d774;
+    transform: scale(0.97);
+}
+
+.bingo-square.completed::after {
+    content: " 🟣";
+}
+
+.bingo-square.locked {
+    cursor: not-allowed;
+    opacity: 0.8;
+    border-style: dashed;
+}

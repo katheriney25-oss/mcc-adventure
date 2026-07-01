@@ -130,6 +130,8 @@
         "text": "MCC 2026 Riddle #3",
 
         "kind": "riddle",
+        
+        "unlocksOn": 3,
 
         "completed": false,
 
@@ -174,6 +176,8 @@
         "text": "MCC 2026 Riddle #1",
 
         "kind": "riddle",
+
+        "unlocksOn": 1,
 
         "completed": false,
 
@@ -324,6 +328,8 @@
         "text": "MCC 2026 Riddle #2",
 
         "kind": "riddle",
+
+        "unlocksOn": 2,
 
         "completed": false,
 

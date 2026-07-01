@@ -1,8 +1,21 @@
+//------------------------------------
+// Constants
+//------------------------------------
+
 const STORAGE_KEY = "mccAdventureProgress2026";
+
+//------------------------------------
+// Startup
+//------------------------------------
+
 
 document.addEventListener("DOMContentLoaded", () => {
     loadBingoCard();
 });
+
+//------------------------------------
+// Load Data
+//------------------------------------
 
 async function loadBingoCard() {
     const response = await fetch("data/bingo2026.json");
@@ -14,9 +27,15 @@ async function loadBingoCard() {
     buildBingoCard(data);
 }
 
+//------------------------------------
+// Build UI
+//------------------------------------
+
 function buildBingoCard(data) {
     const bingoCard = document.getElementById("bingoCard");
     const completedSquares = loadProgress();
+
+    updateBingoStatus(data.card, completedSquares);
 
     bingoCard.innerHTML = "";
 
@@ -33,7 +52,7 @@ function buildBingoCard(data) {
         square.className = "bingo-square";
         square.textContent = squareData.text;
 
-        square.dataset.Id = squareData.id;
+        square.dataset.id = squareData.id;
         square.dataset.kind = squareData.kind;
         
         if (completedSquares.includes(squareData.id)) {
@@ -43,28 +62,61 @@ function buildBingoCard(data) {
         if (squareData.kind === "riddle") {
             square.classList.add("locked");
             square.textContent = `${squareData.icon} ${squareData.text}`;
+
+            square.addEventListener("click", () => {
+                if (square.classList.contains("unlocked")) {
+                    alert(`Transmission #${squareData.unlock.riddle} unlocked!`);
+                }
+            });
         } else {
             square.addEventListener("click", () => {
-                toggleSquare(square, squareData.id);
-            });
-        }
+                toggleSquare(square, squareData.id, data.card);
+        });
+}
 
         bingoCard.appendChild(square);
     });
 }
 
-function toggleSquare(square, Id) {
+function updateRiddleUnlocks(card, bingoCount) {
+    const riddleSquares = card.flat().filter((square) => square.kind === "riddle");
+
+    riddleSquares.forEach((riddle) => {
+        const riddleButton = document.querySelector(`[data-id="${riddle.id}"]`);
+
+        if (!riddleButton) {
+            return;
+        }
+
+        if(bingoCount >= riddle.unlocksOn) {
+            riddleButton.classList.remove("locked");
+            riddleButton.classList.add("unlocked");
+            riddleButton.textContent = `📡 Transmission #${riddle.unlock.riddle} Unlocked`;
+        } else {
+            riddleButton.classList.add("locked");
+            riddleButton.classList.remove("unlocked");
+            riddleButton.textContent = `${riddle.icon} ${riddle.text}`;
+        }
+    });
+}
+
+//------------------------------------
+// Player Progress
+//------------------------------------
+
+function toggleSquare(square, squareId, card) {
     square.classList.toggle("completed");
 
     let completedSquares = loadProgress();
 
-    if (completedSquares.includes(Id)) {
-        completedSquares = completedSquares.filter((id) => id !== Id);
+    if (completedSquares.includes(squareId)) {
+        completedSquares = completedSquares.filter((id) => id !== squareId);
     } else {
-        completedSquares.push(Id);
+        completedSquares.push(squareId);
     }
 
     saveProgress(completedSquares);
+    updateBingoStatus(card, completedSquares);
 }
 
 function loadProgress() {
@@ -80,3 +132,67 @@ function loadProgress() {
 function saveProgress(completedSquares) {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(completedSquares));
 }
+
+function checkForBingos(card, completedSquares) {
+    const patterns = buildBingoPatterns(card);
+
+    const completedBingos = patterns.filter((pattern) => {
+        return pattern.every((square) => 
+            isSquareSatisfied(square,completedSquares)
+        );
+    });
+
+    return completedBingos;
+}
+
+function buildBingoPatterns(card) {
+    const patterns = [];
+
+    //Rows
+    card.forEach((row) => {
+        patterns.push(row);
+    });
+
+    //Columns
+    for (let columnIndex = 0; columnIndex < card[0].length; columnIndex++) {
+        const column = card.map((row) => row[columnIndex]);
+        patterns.push(column);
+    }
+
+    // Diagonal: top-left to bottom-right
+    const diagonalOne = card.map((row, index) => row[index]);
+    patterns.push(diagonalOne);
+
+    // diagonal: top-right to bottom left
+    const diagonalTwo = card.map((row, index) => row[row.length - 1 - index]);
+    patterns.push(diagonalTwo);
+
+    return patterns;
+}
+
+function isSquareSatisfied(square, completedSquares) {
+    //Riddle square count toward a Bingo, 
+    //even before they've been unlocked
+    if (square.kind === "riddle") {
+        return true;
+    }
+
+    return completedSquares.includes(square.id)
+}
+
+function updateBingoStatus(card, completedSquares) {
+    const completedBingos = checkForBingos(card, completedSquares);
+    const bingoStatus = document.getElementById("bingoStatus");
+
+    bingoStatus.textContent = `Bingos completed: ${completedBingos.length}`;
+
+    updateRiddleUnlocks(card, completedBingos.length);
+}
+
+//------------------------------------
+// Event Handlers
+//------------------------------------
+
+//------------------------------------
+// Utility Functions
+//------------------------------------

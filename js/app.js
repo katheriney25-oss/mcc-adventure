@@ -54,7 +54,7 @@ function buildBingoCard(data) {
 
         square.dataset.id = squareData.id;
         square.dataset.kind = squareData.kind;
-        
+
         if (completedSquares.includes(squareData.id)) {
             square.classList.add("completed");
         }
@@ -64,41 +64,39 @@ function buildBingoCard(data) {
             square.textContent = `${squareData.icon} ${squareData.text}`;
 
             square.addEventListener("click", () => {
-                if (square.classList.contains("unlocked")) {
-                    alert(`Transmission #${squareData.unlock.riddle} unlocked!`);
+                if (!square.classList.contains("unlocked")) {
+                    alert(
+`📡 Transmission Encrypted
+
+Earn ${squareData.unlocksOn} Bingo${squareData.unlocksOn > 1 ? "s" : ""} to decrypt this transmission.`
+                    );
+
+                    return;
                 }
+
+                alert(
+`📡 Incoming Transmission
+
+Transmission #${squareData.unlock.riddle} has been decrypted.
+
+You are about to be redirected to the secure submission form.
+
+Good luck, Detective!`
+                );
+
+                window.open(squareData.formUrl, "_blank");
             });
         } else {
             square.addEventListener("click", () => {
                 toggleSquare(square, squareData.id, data.card);
-        });
-}
+            });
+        }
 
         bingoCard.appendChild(square);
     });
 }
+    
 
-function updateRiddleUnlocks(card, bingoCount) {
-    const riddleSquares = card.flat().filter((square) => square.kind === "riddle");
-
-    riddleSquares.forEach((riddle) => {
-        const riddleButton = document.querySelector(`[data-id="${riddle.id}"]`);
-
-        if (!riddleButton) {
-            return;
-        }
-
-        if(bingoCount >= riddle.unlocksOn) {
-            riddleButton.classList.remove("locked");
-            riddleButton.classList.add("unlocked");
-            riddleButton.textContent = `📡 Transmission #${riddle.unlock.riddle} Unlocked`;
-        } else {
-            riddleButton.classList.add("locked");
-            riddleButton.classList.remove("unlocked");
-            riddleButton.textContent = `${riddle.icon} ${riddle.text}`;
-        }
-    });
-}
 
 //------------------------------------
 // Player Progress
@@ -188,6 +186,31 @@ function updateBingoStatus(card, completedSquares) {
 
     updateRiddleUnlocks(card, completedBingos.length);
 }
+
+function updateRiddleUnlocks(card, bingoCount) {
+    const riddleSquares = card.flat().filter((square) => square.kind === "riddle");
+
+    riddleSquares.forEach((riddle) => {
+        const riddleButton = document.querySelector(`[data-id="${riddle.id}"]`);
+
+        if (!riddleButton) {
+            return;
+        }
+
+        if (bingoCount >= riddle.unlocksOn) {
+            riddleButton.classList.remove("locked");
+            riddleButton.classList.add("unlocked");
+            riddleButton.textContent = 
+            `📡 Transmission #${riddle.unlock.riddle}
+            Click Here to Read Transmission`;
+        } else {
+            riddleButton.classList.add("locked");
+            riddleButton.classList.remove("unlocked");
+            riddleButton.textContent = `${riddle.icon} ${riddle.text}`;
+        }
+    });
+}
+
 
 //------------------------------------
 // Event Handlers

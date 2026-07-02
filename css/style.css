@@ -6,18 +6,34 @@
     box-sizing:border-box;
 }
 
-body{
+body {
 
-    background: #1f1730;
-    color: white;
-    font-family: Arial, Helvetica, sans-serif;
-
-    display: flex;
-
-    justify-content: center;
-    align-items: center;
-
+    margin: 0;
     min-height: 100vh;
+    font-family: "Segoe UI", sans-serif;
+    color: white;
+
+    background-color: #2a0d0d;
+    background-image:
+        linear-gradient(
+            rgba(42, 13, 13, 0.55),
+            rgba(25, 8, 8, 0.65)
+        ),
+
+        radial-gradient(
+            circle, 
+            rgba(255,180,120, .10),
+            rgba(0,0,0,0)
+        ), 
+
+        url("../images/mcc-logo.svg");
+
+    background-blend-mode: soft-light;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: auto, contain;
+    background-attachment: fixed;
+
 }
 
 /* ------------- Logo ---------------- */
@@ -57,8 +73,9 @@ h2{
 
 }
 .app {
-    width: min(100%, 900px);
-    padding: 1rem;
+    width: min(1200px, 95vw);
+    margin: 0 auto;
+    padding: 2%;
 }
 
 .hero {
@@ -114,6 +131,56 @@ h2{
     border-style: dashed;
 }
 
+.bingo-square.opened {
+
+    background: linear-gradient(
+        180deg,
+        #8c6b2d,
+        #6e5221
+    );
+
+    border: 2px solid #e7c66d;
+
+    color: #fff7e5;
+
+    box-shadow:
+        inset 0 0 10px rgba(255,255,255,.08),
+        0 0 10px rgba(231,198,109,.20);
+
+    cursor: pointer;
+}
+
+#detectiveCharacter {
+    width: 110px;
+    height: auto;
+    display: block;
+    transition: transform .4s ease;
+}
+
+#detectiveHome {
+    position: fixed;
+    left: 8rem;
+    bottom: 5rem;
+    display: flex;
+    align-items: center;
+    gap: .2rem;
+    color: #d7b46d;
+    font-size: .9rem;
+    font-style: italic;
+
+}
+
+#detectiveStatus {
+    margin-top: .05rem;
+    color: #d7b46d;
+    font-style: italic;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-shadow: 0 1px 3px rgba(0,0,0,.6);
+    text-align: center;
+    line-height: 1.3;
+}
+
 .status-panel {
     text-align: center;
     margin-top: 1rem;
@@ -143,4 +210,81 @@ h2{
     100% {
         transform: scale(1);
     }
+}
+
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(10, 3, 3, 0.75);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    z-index: 1000;
+}
+
+.modal.hidden {
+    display: none;
+}
+
+.modal-content {
+    width: min(90vw, 420px);
+    padding: 2rem;
+
+    background: rgba(50, 18, 14, 0.96);
+    border: 2px solid #d7b46d;
+    border-radius: 1rem;
+
+    color: #f6efe6;
+    text-align: center;
+
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
+}
+
+.modal-icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.modal-close {
+    float: right;
+
+    background: transparent;
+    border: none;
+    color: #d7b46d;
+
+    font-size: 1.8rem;
+    cursor: pointer;
+}
+
+.modal-action {
+    margin-top: 1rem;
+    padding: 0.75rem 1.25rem;
+
+    background: #d7b46d;
+    color: #2a0d0d;
+
+    border: none;
+    border-radius: 0.5rem;
+
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.reset-button {
+    margin-top: 0.75rem;
+    padding: 0.5rem 1rem;
+
+    background: transparent;
+    color: #d7b46d;
+
+    border: 1px solid #d7b46d;
+    border-radius: 0.5rem;
+
+    cursor: pointer;
+}
+
+.reset-button:hover {
+    background: rgba(215, 180, 109, 0.15);
 }

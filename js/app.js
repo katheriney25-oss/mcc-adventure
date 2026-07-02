@@ -3,6 +3,7 @@
 //------------------------------------
 
 const STORAGE_KEY = "mccAdventureProgress2026";
+const TRANSMISSION_KEY = "mccOpenedTransmissions2026";
 
 //------------------------------------
 // Startup
@@ -12,6 +13,16 @@ const STORAGE_KEY = "mccAdventureProgress2026";
 document.addEventListener("DOMContentLoaded", () => {
     loadBingoCard();
 });
+
+document.getElementById("closeModal").addEventListener("click", closeTransmissionModal);
+
+document
+    .getElementById("openTransmissionButton")
+    .addEventListener("click", openTransmissionForm);
+
+document
+    .getElementById("resetCardButton")
+    .addEventListener("click", resetCard);
 
 //------------------------------------
 // Load Data
@@ -27,6 +38,8 @@ async function loadBingoCard() {
     buildBingoCard(data);
 }
 
+
+
 //------------------------------------
 // Build UI
 //------------------------------------
@@ -34,8 +47,7 @@ async function loadBingoCard() {
 function buildBingoCard(data) {
     const bingoCard = document.getElementById("bingoCard");
     const completedSquares = loadProgress();
-
-    updateBingoStatus(data.card, completedSquares);
+    const openedTransmissions = loadOpenedTransmissions();
 
     bingoCard.innerHTML = "";
 
@@ -61,31 +73,16 @@ function buildBingoCard(data) {
 
         if (squareData.kind === "riddle") {
             square.classList.add("locked");
-            square.textContent = `${squareData.icon} ${squareData.text}`;
 
             square.addEventListener("click", () => {
-                if (!square.classList.contains("unlocked")) {
-                    alert(
-`📡 Transmission Encrypted
-
-Earn ${squareData.unlocksOn} Bingo${squareData.unlocksOn > 1 ? "s" : ""} to decrypt this transmission.`
-                    );
-
-                    return;
+                if (square.classList.contains("unlocked") || square.classList.contains("opened")) {
+                    showTransmissionModal(squareData);
+                } else {
+                    alert("📡 Transmission Encrypted\n\nEarn the required Bingo to decrypt this transmission.");
                 }
-
-                alert(
-`📡 Incoming Transmission
-
-Transmission #${squareData.unlock.riddle} has been decrypted.
-
-You are about to be redirected to the secure submission form.
-
-Good luck, Detective!`
-                );
-
-                window.open(squareData.formUrl, "_blank");
             });
+
+                    
         } else {
             square.addEventListener("click", () => {
                 toggleSquare(square, squareData.id, data.card);
@@ -93,6 +90,8 @@ Good luck, Detective!`
         }
 
         bingoCard.appendChild(square);
+
+        updateBingoStatus(data.card, completedSquares);
     });
 }
     
@@ -143,6 +142,24 @@ function checkForBingos(card, completedSquares) {
     return completedBingos;
 }
 
+function loadOpenedTransmissions() {
+
+    const opened = localStorage.getItem(TRANSMISSION_KEY);
+
+    if (!opened) {
+        return [];
+    }
+
+    return JSON.parse(opened);
+}
+
+function saveOpenedTransmissions(openedTransmissions) {
+    localStorage.setItem(
+        TRANSMISSION_KEY,
+        JSON.stringify(openedTransmissions)
+    );
+}
+
 function buildBingoPatterns(card) {
     const patterns = [];
 
@@ -180,14 +197,23 @@ function isSquareSatisfied(square, completedSquares) {
 
 function updateBingoStatus(card, completedSquares) {
     const completedBingos = checkForBingos(card, completedSquares);
+    const openedTransmissions = loadOpenedTransmissions();
+    const rank = getDetectiveRank(openedTransmissions.length);
+
     const bingoStatus = document.getElementById("bingoStatus");
 
-    bingoStatus.textContent = `Bingos completed: ${completedBingos.length}`;
+    bingoStatus.innerHTML = 
+    `Investigation Progress<br>
+    Transmissions Received: ${completedBingos.length}<br>
+    Reports Reviewed: ${openedTransmissions.length}<br>
+    Rank: ${rank}`;
+
 
     updateRiddleUnlocks(card, completedBingos.length);
 }
 
 function updateRiddleUnlocks(card, bingoCount) {
+    const openedTransmissions = loadOpenedTransmissions();
     const riddleSquares = card.flat().filter((square) => square.kind === "riddle");
 
     riddleSquares.forEach((riddle) => {
@@ -197,7 +223,16 @@ function updateRiddleUnlocks(card, bingoCount) {
             return;
         }
 
-        if (bingoCount >= riddle.unlocksOn) {
+        if (openedTransmissions.includes(riddle.id)) {
+
+            riddleButton.classList.remove("locked", "unlocked");
+            riddleButton.classList.add("opened");
+            riddleButton.textContent =
+            `📂 Transmission #${riddle.unlock.riddle}
+            Transmission Reviewed`;
+
+        } else if(bingoCount >= riddle.unlocksOn) {
+
             riddleButton.classList.remove("locked");
             riddleButton.classList.add("unlocked");
             riddleButton.textContent = 
@@ -208,14 +243,97 @@ function updateRiddleUnlocks(card, bingoCount) {
             riddleButton.classList.remove("unlocked");
             riddleButton.textContent = `${riddle.icon} ${riddle.text}`;
         }
+
     });
 }
 
+let activeTransmissionUrl = "";
+let activeTransmissionId = null;
+
+function showTransmissionModal(squareData) {
+    activeTransmissionUrl = squareData.formUrl;
+    activeTransmissionId = squareData.id;
+
+    setDetectiveStatus("Transmission", "Located");
+
+    document.getElementById("modalTitle").textContent =
+        `Transmission #${squareData.unlock.riddle} Decrypted`;
+
+    document.getElementById("modalMessage").textContent =
+        "You have earned access to a classified message. Open the secure form to submit your answer.";
+
+    document.getElementById("transmissionModal").classList.remove("hidden");
+}
+
+function closeTransmissionModal() {
+    document.getElementById("transmissionModal").classList.add("hidden");
+
+    setDetectiveStatus("Awaiting", "Coordinates...")
+}
+
+function openTransmissionForm() {
+
+    let openedTransmissions = loadOpenedTransmissions();
+
+    if (!openedTransmissions.includes(activeTransmissionId)) {
+        openedTransmissions.push(activeTransmissionId);
+    }
+
+    saveOpenedTransmissions(openedTransmissions);
+
+    window.open(activeTransmissionUrl, "_blank");
+
+    closeTransmissionModal();
+
+    loadBingoCard();
+}
+
+function setDetectiveStatus(line1, line2) {
+    document.getElementById("detectiveStatus").innerHTML = 
+        `${line1}<br>${line2}`;
+}
+
+function getDetectiveRank(openedCount) {
+    if (openedCount >= 3) {
+        return "Chief Detective";
+    }
+
+    if (openedCount === 2) {
+        return "Senior Investigator";
+    }
+
+    if (openedCount === 1) {
+        return "Junior Detective";
+    }
+
+    return "Rookie Detective";
+}
 
 //------------------------------------
 // Event Handlers
 //------------------------------------
+function resetCard() {
+    const confirmReset = confirm(
+    `Reset Investigation?
 
+    This will clear:
+
+    • Completed Bingo squares
+    • Reviewed transmissions
+
+    Your investigation will begin again from the start.`
+    );
+
+    if (!confirmReset) {
+        return;
+    }
+
+    localStorage.removeItem(STORAGE_KEY);
+    localStorage.removeItem(TRANSMISSION_KEY);
+
+    location.reload();
+
+}
 //------------------------------------
 // Utility Functions
 //------------------------------------

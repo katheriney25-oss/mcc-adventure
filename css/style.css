@@ -151,14 +151,15 @@ h2{
 }
 
 .status-panel {
-    width: min(520px, 92vw);
-    margin: 1.25rem auto 2rem;
-    padding: 1rem;
+    width: min(700px, 92vw);
+    margin: 1rem auto 1.25rem;
+    padding: 1rem 1.25rem;
 
     display: flex;
-    align-items: center;
+    alignitems: center;
     justify-content: center;
-    gap: 1rem;
+    gap: 1.5rem;
+    flex-wrap: wrap;
 
     background: rgba(20, 5, 20, 0.75);
     border: 2px solid #d7b46d;
@@ -169,6 +170,7 @@ h2{
     font-weight: bold;
     text-align: left;
 }
+
 
 #detectiveCharacter {
     width: 105px;
@@ -181,10 +183,11 @@ h2{
 #detectiveHome {
     display: flex;
     align-items: center;
-    gap: .75rem;
+    gap: .2rem;
 }
 
 #detectiveStatus {
+    margin-left: -4px;
     color: #d7b46d;
     font-style: italic;
     font-size: 1rem;
@@ -193,26 +196,54 @@ h2{
     text-shadow: 0 1px 3px rgba(0,0,0,.6);
 }
 
+#bingoStatus {
+    min-width: 230px;
+}
+
+.reset-button {
+    flex-basis: 100%;
+    max-width: 220px;
+    margin: 0 auto;
+}
+
 @media (max-width: 600px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        margin-bottom: 1rem;
+    }
+
     .status-panel {
         flex-direction: column;
         text-align: center;
-        gap: .5rem;
+        gap: .6rem;
     }
 
     #detectiveHome {
-        flex-direction: column;
-        gap: .35rem;
-    }
+        flex-direction: row;
+        justify-content: center;
+}
 
     #detectiveCharacter {
-        width: 95px;
+        width: 90px;
     }
 
     #detectiveStatus {
         font-size: .95rem;
     }
+
+    #bingoStatus {
+        order: 2;
+    }
+
+    .reset-button {
+        width: 100%;
+        max-width: 260px;
+    }
 }
+
 .bingo-square.unlocked {
     cursor: pointer;
     opacity: 1;
@@ -296,18 +327,8 @@ h2{
     cursor: pointer;
 }
 
-.reset-button {
-    margin-top: 0.75rem;
-    padding: 0.5rem 1rem;
 
-    background: transparent;
-    color: #d7b46d;
 
-    border: 1px solid #d7b46d;
-    border-radius: 0.5rem;
-
-    cursor: pointer;
-}
 
 .reset-button:hover {
     background: rgba(215, 180, 109, 0.15);

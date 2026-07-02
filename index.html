@@ -11,37 +11,43 @@
 
 <body>
 
-    <main class ="app">
+    <main class="app">
 
-        <header class="hero">
-            <h1 id="title">MoonCity Con: A Meeple Among Us</h1>
-            <h2 id="subtitle">Loading Investigation...</h2>
-        </header>
-
-        <section class="bingo-card" id="bingoCard"></section>
+    <header class="hero">
+        <h1 id="title">MoonCity Con</h1>
+        <h2 id="subtitle">A Meeple Among Us</h2>
         <section class="status-panel">
-            <p id="bingoStatus">
-                Bingos completed: 0
-            </p>
+            <div id="detectiveHome">
+
+                <img
+                    id="detectiveCharacter"
+                    src="images/meeple-detective.png"
+                    alt="Meeple Detective">
+
+                <div id="detectiveStatus">
+                    Awaiting<br>Coordinates
+                </div>
+
+            </div>
+
+            <div id="bingoStatus">
+                Investigation Progress<br>
+                Transmissions Received: 0<br>
+                Reports Reviewed: 0<br>
+                Rank: Rookie Detective
+            </div>
+
             <button id="resetCardButton" class="reset-button">
                 Reset Investigation
             </button>
+
         </section>
 
-        <div id="detectiveHome">
+    </header>
 
-            <img 
-                id="detectiveCharacter"
-                src="images/meeple-detective.png"
-                alt="Meeple Detective">
-            
-            <div id="detectiveStatus">
-                Awaiting<br>Coordinates
-            </div>
-        </div>
+    <section class="bingo-card" id="bingoCard"></section>
 
-    </main>
-
+</main>
     <div id="transmissionModal" class="modal hidden">
     <div class="modal-content">
         <button id="closeModal" class="modal-close">×</button>

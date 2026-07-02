@@ -218,7 +218,9 @@ h2{
     .status-panel {
         flex-direction: column;
         text-align: center;
-        gap: .6rem;
+        padding: .75rem;
+        gap: .45rem;
+        margin-bottom: 1rem;
     }
 
     #detectiveHome {
@@ -227,7 +229,7 @@ h2{
 }
 
     #detectiveCharacter {
-        width: 90px;
+        width: 80px;
     }
 
     #detectiveStatus {
@@ -235,7 +237,8 @@ h2{
     }
 
     #bingoStatus {
-        order: 2;
+        font-size: .95rem;
+        line-height: 1.25;
     }
 
     .reset-button {

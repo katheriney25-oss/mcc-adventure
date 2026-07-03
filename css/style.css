@@ -349,7 +349,7 @@ h2{
 .hqpromotion-modal-content hr {
     margin: 1.75rem 0;
     border: none;
-    border-top: 1px solid rgba(215,180,109,.4);
+    border-top: 1px solid rgba(215, 180, 109, 0.684);
 }
 
 .hqpromotion-modal-content h3 {

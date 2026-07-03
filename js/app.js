@@ -5,6 +5,7 @@
 const STORAGE_KEY = "mccAdventureProgress2026";
 const TRANSMISSION_KEY = "mccOpenedTransmissions2026";
 const HQ_PROMOTION_KEY = "mccHQPromotionShown2026";
+const SUBMIT_CASEFILE_URL = "https://forms.gle/y8nqQ38iVrcWTXCc9";
 
 //------------------------------------
 // Startup
@@ -36,6 +37,27 @@ document
 document
     .getElementById("closeHQPromotionModal")
     .addEventListener("click", closeHQPromotionModal)
+
+document
+    .getElementById("submitInvestigationButton")
+    .addEventListener("click", openSubmitConfirmationModal)
+
+document.getElementById("SubmitInvestigationButtonModal")
+    .addEventListener("click", beginCaseFileSubmission);
+
+document.getElementById("ContinueButton")
+    .addEventListener("click", continueInvestigation);
+
+document.getElementById("close-submitconfirmationmodal")
+    .addEventListener("click", closeSubmitConfirmationModal);
+
+document.getElementById("KeepContinueButton")
+    .addEventListener("click", continueInvestigationAgain);
+
+//continueInvestigation will be replaced when function to open Google Form is completed
+document.getElementById("FinalSubmitButtonModal")
+    .addEventListener("click", submitCaseFile);
+
 
 //------------------------------------
 // Load Data
@@ -408,6 +430,54 @@ function closeHQPromotionModal() {
     document
         .getElementById("HQPromotionModal")
         .classList.add("hidden");
+}
+
+function continueInvestigation() {
+    
+    closeHQPromotionModal();
+
+}
+
+function continueInvestigationAgain() {
+    
+    closeSubmitConfirmationModal();
+
+}
+
+function beginCaseFileSubmission() {
+
+    closeHQPromotionModal();
+
+    openSubmitConfirmationModal();
+}
+
+function openSubmitConfirmationModal() {
+
+    document
+        .getElementById("SubmitConfirmationModal")
+        .classList.remove("hidden");
+}
+
+function closeSubmitConfirmationModal() {
+
+    document
+        .getElementById("SubmitConfirmationModal")
+        .classList.add("hidden");
+}
+
+function submitCaseFile() {
+
+    closeSubmitConfirmationModal();
+
+//    localStorage.setItem(
+//        "caseFileClosed",
+//        "true"
+//    );
+
+    window.open(
+        SUBMIT_CASEFILE_URL,
+        "_blank"
+    );
 }
 
 //------------------------------------

@@ -157,8 +157,58 @@
             <p> -Headquarters</p>
             <hr>
 
+            <button id="SubmitInvestigationButtonModal" class="hq-modal-button">
+                Submit Case File - Close Investigation
+            </button>
+            <button id="ContinueButton" class="hq-modal-button">
+                Return to Investigation
+            </button>
+
+
+
         </div>
     </div>
+
+    <div id="SubmitConfirmationModal" class="modal hidden">
+        <div class="modal-content submitconfirmation-modal-content">
+            <button id="close-submitconfirmationmodal" class="modal-close">x</button>
+
+            <div class="modal-icon">📋</div>
+            <h2>From the desk of your Lieutenant</h2>
+            <p>
+                Remember, once your Case File is closed,<br> your investigation is over. 
+            </p>
+            <br>
+            <p>
+                You will no longer be able to: 
+            </p>
+            <br>
+           <ul class="tips-list">
+                <li>Continue earning promotions</li>
+                <li>Unlock any additional transmissions</li>
+                <li>Indentify the Meeple Among Us</li>
+                <li>Qualify for the Grand Prize Reward</li>
+            </ul>
+            <p>
+                Are you certain your investigation is complete? 
+            </p>
+            <br>
+            <hr>
+            <br>
+            
+            <button id="KeepContinueButton" class="hq-modal-button">
+                Return to Investigation
+            </button>
+
+            <button id="FinalSubmitButtonModal" class="hq-modal-button">
+                Yes, Close My Case File
+            </button>
+
+    </div>
+</div>
+
+            
+            
 
 
     <div id="submissionPanel" class="submission-panel locked">

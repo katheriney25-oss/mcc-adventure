@@ -4,6 +4,7 @@
 
 const STORAGE_KEY = "mccAdventureProgress2026";
 const TRANSMISSION_KEY = "mccOpenedTransmissions2026";
+const HQ_PROMOTION_KEY = "mccHQPromotionShown2026";
 
 //------------------------------------
 // Startup
@@ -23,6 +24,18 @@ document
 document
     .getElementById("resetCardButton")
     .addEventListener("click", resetCard);
+
+document
+    .getElementById("howtoPlayButton")
+    .addEventListener("click", openHowToPlayModal);
+
+document
+    .getElementById("closeHowToPlayModal")
+    .addEventListener("click", closeHowToPlayModal);
+
+document
+    .getElementById("closeHQPromotionModal")
+    .addEventListener("click", closeHQPromotionModal)
 
 //------------------------------------
 // Load Data
@@ -202,14 +215,44 @@ function updateBingoStatus(card, completedSquares) {
 
     const bingoStatus = document.getElementById("bingoStatus");
 
+    if (completedBingos.length >= 1 && !hasSeenHQPromotion()) {
+        openHQPromotionModal();
+        markHQPromotionSeen();
+    }   
+
     bingoStatus.innerHTML = 
     `Investigation Progress<br>
     Transmissions Received: ${completedBingos.length}<br>
     Reports Reviewed: ${openedTransmissions.length}<br>
     Rank: ${rank}`;
 
+    updateSubmissionPanel(completedBingos.length);
 
     updateRiddleUnlocks(card, completedBingos.length);
+}
+
+function updateSubmissionPanel(bingoCount) {
+    const submissionPanel = document.getElementById("submissionPanel");
+    const submissionStatus = document.getElementById("submissionStatus");
+    const submitButton = document.getElementById("submitInvestigationButton");
+
+    if (!submissionPanel || !submissionStatus || !submitButton) {
+        return;
+    }
+
+    if (bingoCount >= 1) {
+        submissionPanel.classList.remove("locked");
+        submitButton.disabled = false;
+
+        submissionStatus.innerHTML =
+            "📨 You are eligible for today's Daily Prize Drawing.<br>Submitting ends your investigation.";
+    } else {
+        submissionPanel.classList.add("locked");
+        submitButton.disabled = true;
+
+        submissionStatus.innerHTML =
+            "🔒 Complete one BINGO to become eligible for the Daily Prize Drawing.";
+    }
 }
 
 function updateRiddleUnlocks(card, bingoCount) {
@@ -330,10 +373,51 @@ function resetCard() {
 
     localStorage.removeItem(STORAGE_KEY);
     localStorage.removeItem(TRANSMISSION_KEY);
+    // DEVELOPMENT ONLY
+    // Remove before MoonCityCon 2026.
+    // Keeps the HQ Promotion transmission replayable after pressing Reset.
+    localStorage.removeItem(HQ_PROMOTION_KEY);
 
     location.reload();
 
 }
+
+function openHowToPlayModal() {
+
+    document
+        .getElementById("howToPlayModal")
+        .classList.remove("hidden");
+}
+
+function closeHowToPlayModal() {
+
+    document
+        .getElementById("howToPlayModal")
+        .classList.add("hidden");
+}
+
+function openHQPromotionModal() {
+
+    document
+        .getElementById("HQPromotionModal")
+        .classList.remove("hidden");
+}
+
+function closeHQPromotionModal() {
+
+    document
+        .getElementById("HQPromotionModal")
+        .classList.add("hidden");
+}
+
 //------------------------------------
 // Utility Functions
 //------------------------------------
+
+function hasSeenHQPromotion() {
+    return localStorage.getItem(HQ_PROMOTION_KEY) === "true";
+}
+
+function markHQPromotionSeen() {
+    localStorage.setItem(HQ_PROMOTION_KEY, "true");
+}

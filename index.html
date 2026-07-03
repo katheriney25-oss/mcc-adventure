@@ -40,6 +40,9 @@
             <button id="resetCardButton" class="reset-button">
                 Reset Investigation
             </button>
+            <button id="howtoPlayButton" class="info-button">
+                Detective's Guide to the Investigation
+            </button>
 
         </section>
 
@@ -65,6 +68,114 @@
         </button>
     </div>
 </div>
+    <div id="howToPlayModal" class="modal hidden">
+        <div class="modal-content rules-modal-content">
+            <button id="closeHowToPlayModal" class="modal-close">x</button>
+
+            <div class="modal-icon">🕵️</div>
+            <h2>Case File Instructions & Rewards</h2>
+            <p>
+                Complete BINGO squares to unlock transmissions to advance your investigation.<br>
+                Standard BINGO rules apply: complete 5 in a row, column or diagonal to unlock a riddle square.<br>
+                Riddles are Free Spaces<br>
+                Submit your answer to the riddle on the form that unlocks to advance. 
+            </p>
+            <p>
+                Complete at least one BINGO to become eligible for the Daily Prize Drawings. You may submit your investigation<br>
+                immediately—even if you haven't solved the unlocked riddle—but submitting closes your case file and ends your<br>
+                investigation.
+            </p>
+            <p>
+                Or keep investigating! Unlock all riddles, identify the Meeple Among Us, and enter the grand prize drawing<br>
+                for a badge to next year's MoonCity Con
+            </p>
+            <p>
+                Everyone who unlocks all riddles (even without answering them) will receive a Miniature Meeple Detective<br>
+                While Supplies Last<br>
+                <i>(makes a great first player marker for all your games!)</i>
+            </p>
+            <p>
+                Don't want to post on Facebook? Send the picture to katherine at mooncitykatherine@gmail.com - and she will post for you. 
+            </p>
+            <p>
+                Need help? Find Katherine during the convention - she will get you connected to the discord channel. 
+            </p>
+            <p>
+                Good Hunting!
+            </p>
+            <hr>
+
+            <h3>📌 Notes from HQ</h3>
+            <ul class="tips-list">
+                <li>All Organizers are happy to answer questions without giving away clues.</li>
+                <li>Some Organizers may take coffee bribes for clues</li>
+                <li>Discord is the fastest way to ask for help</li>
+                <li>Nevermind on the coffee - can't risk corruption charges</li>
+                <li>There are no trick questions.... probably.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="HQPromotionModal" class="modal hidden">
+        <div class="modal-content hqpromotion-modal-content">
+            <button id="closeHQPromotionModal" class="modal-close">x</button>
+
+            <div class="modal-icon">📡</div>
+            <h2>Incoming HQ Transmission</h2>
+            <p>
+                <b>Excellent work, Rookie.</b>
+            </p>
+            <p>
+                Your investigation has uncovered enough evidence to officially open a Case File.
+            </p>
+            <p>
+                <b>You've earned a promotion to Junior Detective</b>
+            </p>
+            <p>
+                You now have two options: 
+            </p>
+            <hr>
+            <h3>📨 Close Your Case File</h3>
+            <p>
+                Submit your investigation to Headquarters and be entered into <b>every remaining Daily Prize Drawing</b><br>during MoonCityCon2026.
+            </p>
+            <p>
+                <b>OR</b>
+            </p>
+            <h4>🕵 Continue Your Investigation</h4>
+            <p>
+                Keep gathering evidence, unlock additional transmissions, work your way up to Chief Detective,<br>
+                Identify the <b>Meeple Among Us</b>, and qualify for the Grand Prize Drawing.
+            </p>
+            <p>
+                Every detective who unlocks <b>all transmissions</b> will also receive a<br>
+                <b>Miniature Meeple Detective</b><i>(while supplies last).</i>
+            </p>
+            <p>
+                The choice is yours, Detective.
+            </p>
+            <p> -Headquarters</p>
+            <hr>
+
+        </div>
+    </div>
+
+
+    <div id="submissionPanel" class="submission-panel locked">
+
+        <p id="submissionStatus">
+            🔒 Complete one BINGO to become eligible for the Daily Prize Drawing.
+        </p>
+
+        <button
+            id="submitInvestigationButton"
+            class="submit-button"
+            disabled>
+        
+            Submit Investigation
+
+        </button>
+    </div>
 
     <script src="js/app.js"></script>
 

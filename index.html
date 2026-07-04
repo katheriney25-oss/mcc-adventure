@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
+<script>
+    const conStart = new Date("2026-08-14T08:00:00-05:00");
+
+    if (new Date() < conStart) {
+        window.location.href = "teaser.html";
+    }
+</script>
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
 
@@ -207,8 +216,49 @@
     </div>
 </div>
 
+    <div id="EncryptedTransmissionModal" class="modal hidden">
+        <div class="modal-content encryptedtransmission-modal-content">
             
+            <div class="modal-icon">📡</div>
+            <h2>Transmission Encrypted</h2>
+            <p>
+                Earn the required Bingo to decrypt this transmission
+            </p>
+            <br>
+            <button id="EncryptedTransmission" class="hq-modal-button">
+                OK
+            </button>
+        </div>
+    </div>
+
+    <div id="ResetConfirmationModal" class="modal hidden">
+        <div class="modal-content resetconfirmation-modal-content">
             
+            <div class="modal-icon">📋</div>
+            <h2>Reset Investigation?</h2>
+            <p>
+                This will clear:
+            </p>
+            <br>
+            <ul class="tips-list">
+                <li>Completed Bingo Squares</li>
+                <li>Reviewed transmissions</li>
+            </ul>
+            <br>
+            <p>
+                Your investigation will begin again from the start
+            </p>
+
+            <button id="ResetConfirmationOK" class="hq-modal-button">
+                OK
+            </button>
+            <button id="ResetConfirmationX" class="hq-modal-button">
+                Cancel
+            </button>
+        </div>
+    </div>
+
+               
 
 
     <div id="submissionPanel" class="submission-panel locked">

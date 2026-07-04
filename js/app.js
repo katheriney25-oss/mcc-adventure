@@ -6,6 +6,7 @@ const STORAGE_KEY = "mccAdventureProgress2026";
 const TRANSMISSION_KEY = "mccOpenedTransmissions2026";
 const HQ_PROMOTION_KEY = "mccHQPromotionShown2026";
 const SUBMIT_CASEFILE_URL = "https://forms.gle/y8nqQ38iVrcWTXCc9";
+const UNLOCK_ANIMATION_KEY = "mccUnlockAnimationsShown2026"
 
 //------------------------------------
 // Startup
@@ -57,6 +58,16 @@ document.getElementById("KeepContinueButton")
 //continueInvestigation will be replaced when function to open Google Form is completed
 document.getElementById("FinalSubmitButtonModal")
     .addEventListener("click", submitCaseFile);
+
+document.getElementById("ResetConfirmationOK")
+    .addEventListener("click", confirmResetCard);
+
+document.getElementById("ResetConfirmationX")
+    .addEventListener("click", closeResetConfirmationModal);
+
+document.getElementById("EncryptedTransmissionModal")
+    .addEventListener("click", closeEncryptedTransmissionModal);
+
 
 
 //------------------------------------
@@ -113,7 +124,7 @@ function buildBingoCard(data) {
                 if (square.classList.contains("unlocked") || square.classList.contains("opened")) {
                     showTransmissionModal(squareData);
                 } else {
-                    alert("📡 Transmission Encrypted\n\nEarn the required Bingo to decrypt this transmission.");
+                    openEncryptedTransmissionModal();
                 }
             });
 
@@ -237,10 +248,8 @@ function updateBingoStatus(card, completedSquares) {
 
     const bingoStatus = document.getElementById("bingoStatus");
 
-    if (completedBingos.length >= 1 && !hasSeenHQPromotion()) {
-        openHQPromotionModal();
-        markHQPromotionSeen();
-    }   
+
+
 
     bingoStatus.innerHTML = 
     `Investigation Progress<br>
@@ -303,6 +312,38 @@ function updateRiddleUnlocks(card, bingoCount) {
             riddleButton.textContent = 
             `📡 Transmission #${riddle.unlock.riddle}
             Click Here to Read Transmission`;
+
+            const shownUnlocks = loadShownUnlockAnimations();
+
+            if (!shownUnlocks.includes(riddle.id)) {
+
+                shownUnlocks.push(riddle.id);
+                saveShownUnlockAnimations(shownUnlocks);
+
+                setDetectiveStatus("Transmission", "Unlocked!");
+
+                animateDetectiveUnlock(() => {
+
+                    if (riddle.unlocksOn === 1 && !hasSeenHQPromotion()) {
+
+                        setDetectiveStatus("HQ", "Calling...");
+
+                        setTimeout(() => {
+                            openHQPromotionModal();
+                            markHQPromotionSeen();
+                        }, 700);
+                    
+                    } else if (riddle.unlocksOn === 3) {
+
+                        setDetectiveStatus("All Transmissions", "Received");
+
+                    } else {
+
+                        setDetectiveStatus("Awaiting", "Next Coordinates...");
+
+            }
+        });
+    }
         } else {
             riddleButton.classList.add("locked");
             riddleButton.classList.remove("unlocked");
@@ -333,7 +374,6 @@ function showTransmissionModal(squareData) {
 function closeTransmissionModal() {
     document.getElementById("transmissionModal").classList.add("hidden");
 
-    setDetectiveStatus("Awaiting", "Coordinates...")
 }
 
 function openTransmissionForm() {
@@ -378,31 +418,19 @@ function getDetectiveRank(openedCount) {
 // Event Handlers
 //------------------------------------
 function resetCard() {
-    const confirmReset = confirm(
-    `Reset Investigation?
+    openResetConfirmationModal();
+}
 
-    This will clear:
-
-    • Completed Bingo squares
-    • Reviewed transmissions
-
-    Your investigation will begin again from the start.`
-    );
-
-    if (!confirmReset) {
-        return;
-    }
-
-    localStorage.removeItem(STORAGE_KEY);
-    localStorage.removeItem(TRANSMISSION_KEY);
+//    localStorage.removeItem(STORAGE_KEY);
+//    localStorage.removeItem(TRANSMISSION_KEY);
     // DEVELOPMENT ONLY
     // Remove before MoonCityCon 2026.
     // Keeps the HQ Promotion transmission replayable after pressing Reset.
-    localStorage.removeItem(HQ_PROMOTION_KEY);
+//  localStorage.removeItem(HQ_PROMOTION_KEY);
 
-    location.reload();
+//    location.reload();
 
-}
+//}
 
 function openHowToPlayModal() {
 
@@ -430,6 +458,8 @@ function closeHQPromotionModal() {
     document
         .getElementById("HQPromotionModal")
         .classList.add("hidden");
+
+    setDetectiveStatus("Awaiting", "Next Coordinates...")
 }
 
 function continueInvestigation() {
@@ -480,6 +510,62 @@ function submitCaseFile() {
     );
 }
 
+function openEncryptedTransmissionModal() {
+    document
+        .getElementById("EncryptedTransmissionModal")
+        .classList.remove("hidden");
+}
+
+function closeEncryptedTransmissionModal() {
+    document
+        .getElementById("EncryptedTransmissionModal")
+        .classList.add("hidden");
+}
+
+
+function openResetConfirmationModal() {
+    document
+        .getElementById("ResetConfirmationModal")
+        .classList.remove("hidden");
+}
+
+function closeResetConfirmationModal() {
+    document
+        .getElementById("ResetConfirmationModal")
+        .classList.add("hidden");
+}
+
+function confirmResetCard() {
+    localStorage.removeItem(STORAGE_KEY);
+    localStorage.removeItem(TRANSMISSION_KEY);
+    localStorage.removeItem(UNLOCK_ANIMATION_KEY);
+
+    // DEVELOPMENT ONLY
+    // Remove before MoonCityCon 2026.
+    localStorage.removeItem(HQ_PROMOTION_KEY);
+
+    location.reload();
+}
+
+function animateDetectiveUnlock(onComplete) {
+
+    const detective = document.getElementById("detectiveCharacter");
+
+    detective.classList.remove("unlocking");
+    void detective.offsetWidth;
+    detective.classList.add("unlocking");
+
+    setTimeout(() => {
+
+        detective.classList.remove("unlocking");
+
+        if (onComplete) {
+            onComplete();
+        }
+
+    }, 1200);
+}
+
 //------------------------------------
 // Utility Functions
 //------------------------------------
@@ -490,4 +576,21 @@ function hasSeenHQPromotion() {
 
 function markHQPromotionSeen() {
     localStorage.setItem(HQ_PROMOTION_KEY, "true");
+}
+
+function loadShownUnlockAnimations() {
+    const shown = localStorage.getItem(UNLOCK_ANIMATION_KEY);
+
+    if (!shown) {
+        return [];
+    }
+
+    return JSON.parse(shown);
+}
+
+function saveShownUnlockAnimations(shownUnlocks) {
+    localStorage.setItem(
+        UNLOCK_ANIMATION_KEY,
+        JSON.stringify(shownUnlocks)
+    );
 }

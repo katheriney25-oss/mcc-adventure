@@ -516,5 +516,154 @@ h2{
     }
 }
 
+/* --------------- Animation ------------ */
 
+#detectiveCharacter.unlocking {
+    animation: detectiveUnlock 0.9s ease-in-out;
+}
+
+@keyframes detectiveUnlock {
+    0% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    25% {
+        transform: translateY(-8px) rotate(-4deg);
+    }
+
+    50% {
+        transform: translateY(0) rotate(4deg);
+    }
+
+    75% {
+        transform: translateY(-4px) rotate(-2deg);
+    }
+
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+}
+/*==================================================
+    TEASER PAGE - MISSION CONTROL
+==================================================*/
+
+body.teaser {
+    margin: 0;
+    min-height: 100vh;
+    background:
+        radial-gradient(circle at top, rgba(255, 210, 120, 0.12), transparent 35%),
+        linear-gradient(180deg, #120f1f 0%, #090711 100%);
+    color: #f7ead0;
+    font-family: Georgia, serif;
+}
+
+.missionControl {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 36px 20px 60px;
+    text-align: center;
+}
+
+.missionControl h1 {
+    margin: 0 0 20px;
+    color: #f2c76b;
+    font-size: clamp(2.2rem, 6vw, 4.5rem);
+    letter-spacing: 0.12em;
+    text-shadow: 0 0 18px rgba(242, 199, 107, 0.35);
+}
+
+.detective {
+    width: min(320px, 75vw);
+    display: block;
+    margin: 10px auto 24px;
+    filter: drop-shadow(0 0 22px rgba(242, 199, 107, 0.35));
+}
+
+.statusBox,
+.countdown,
+.briefing,
+.intel {
+    background: rgba(22, 18, 35, 0.88);
+    border: 2px solid rgba(242, 199, 107, 0.55);
+    border-radius: 18px;
+    padding: 20px;
+    margin: 18px auto;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.45);
+}
+
+.statusBox h2,
+.countdown h2,
+.briefing h2,
+.intel h2 {
+    margin-top: 0;
+    color: #f2c76b;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+#status {
+    font-size: 1.2rem;
+    font-style: italic;
+}
+
+#timer {
+    font-family: "Courier New", monospace;
+    font-size: clamp(1.4rem, 4vw, 2.4rem);
+    color: #ffffff;
+    text-shadow: 0 0 12px rgba(255, 255, 255, 0.25);
+}
+
+.briefing p {
+    max-width: 650px;
+    margin: 0 auto;
+    line-height: 1.7;
+    font-size: 1.1rem;
+}
+
+.discordButton {
+    display: inline-block;
+    margin: 24px auto;
+    padding: 16px 28px;
+    background: #f2c76b;
+    color: #161223;
+    border-radius: 999px;
+    font-weight: bold;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    box-shadow: 0 0 18px rgba(242, 199, 107, 0.4);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.discordButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 28px rgba(242, 199, 107, 0.65);
+}
+
+.intel ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.intel li {
+    margin: 10px 0;
+    font-family: "Courier New", monospace;
+    font-size: 1.05rem;
+}
+
+/* Mobile polish */
+@media (max-width: 600px) {
+    .missionControl {
+        padding-top: 24px;
+    }
+
+    .statusBox,
+    .countdown,
+    .briefing,
+    .intel {
+        padding: 16px;
+        border-radius: 14px;
+    }
+}
 

@@ -33,3 +33,25 @@ function updateCountdown() {
 updateCountdown();
 
 setInterval(updateCountdown,1000);
+
+//------------------------------------
+// Classified Clue Modal
+//------------------------------------
+
+const clueTrigger = document.querySelector(".clue-trigger");
+const clueModal = document.getElementById("clueModal");
+const closeClueModal = document.getElementById("closeClueModal");
+
+clueTrigger.addEventListener("click", () => {
+    clueModal.classList.remove("hidden");
+});
+
+closeClueModal.addEventListener("click", () => {
+    clueModal.classList.add("hidden");
+});
+
+clueModal.addEventListener("click", (event) => {
+    if (event.target === clueModal) {
+        clueModal.classList.add("hidden");
+    }
+});

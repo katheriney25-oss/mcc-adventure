@@ -280,6 +280,31 @@ h2{
 
 }
 
+.hidden-button {
+
+    margin-top:.75rem;
+
+    padding:.6rem 1.5rem;
+
+    background:#4c7d3b;
+
+    color:white;
+
+    border:none;
+
+    border-radius:.5rem;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+}
+
+.hidden-button:hover {
+    background: hsl(121, 89%, 71%);
+}
+
+
 .hq-modal-button {
     margin-top:.75rem;
 
@@ -335,6 +360,7 @@ h2{
 .tips-list li {
     margin-bottom: .5rem;
 }
+
 
 .hqpromotion-modal-content {
     max-height: 85vh;
@@ -451,7 +477,59 @@ h2{
     font-weight: bold;
     cursor: pointer;
 }
+/*==================================================
+    FINAL CASE FILE MODAL
+==================================================*/
 
+.final-case-file {
+    border: 3px solid #8b1e1e;
+    background:
+        linear-gradient(rgba(24, 18, 18, 0.96), rgba(12, 8, 8, 0.96));
+    box-shadow:
+        0 0 30px rgba(139, 30, 30, 0.65),
+        inset 0 0 18px rgba(255, 220, 160, 0.12);
+}
+
+.final-case-file h2 {
+    color: #f2c76b;
+    letter-spacing: 0.12em;
+}
+
+.classified-stamp {
+    display: inline-block;
+    margin: 8px 0 18px;
+    padding: 8px 16px;
+    border: 3px solid #b32626;
+    color: #b32626;
+    font-weight: 900;
+    font-size: 1.25rem;
+    letter-spacing: 0.16em;
+    transform: rotate(-3deg);
+    text-transform: uppercase;
+}
+
+.final-warning {
+    color: #ffd27a;
+    font-weight: bold;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-top: 22px;
+}
+
+.danger-button {
+    background: #8b1e1e;
+    color: #fff3dc;
+    border: 2px solid #f2c76b;
+}
+
+.danger-button:hover {
+    background: #b32626;
+}
 /* --------------- Mobile ------------ */
 
 @media (max-width: 600px) {
@@ -665,5 +743,106 @@ body.teaser {
         padding: 16px;
         border-radius: 14px;
     }
+}
+
+/*==================================================
+    TEASER PAGE - FLOATING ICONS + CLUE MODAL
+==================================================*/
+
+.teaser-icons {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 20;
+}
+
+.teaser-icon {
+    position: absolute;
+    pointer-events: auto;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    border: 2px solid rgba(242, 199, 107, 0.7);
+    background: rgba(22, 18, 35, 0.9);
+    color: #f2c76b;
+    font-size: 1.6rem;
+    cursor: pointer;
+    box-shadow: 0 0 18px rgba(242, 199, 107, 0.35);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.teaser-icon:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 28px rgba(242, 199, 107, 0.65);
+}
+
+.teaser-icon:nth-child(1) {
+    top: 18%;
+    left: 8%;
+}
+
+.teaser-icon:nth-child(2) {
+    top: 28%;
+    right: 9%;
+}
+
+.teaser-icon:nth-child(3) {
+    bottom: 18%;
+    left: 10%;
+}
+
+.teaser-icon:nth-child(4) {
+    bottom: 24%;
+    right: 12%;
+}
+
+.clue-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(5, 4, 10, 0.78);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    padding: 20px;
+}
+
+.clue-modal.hidden {
+    display: none;
+}
+
+.clue-modal-content {
+    max-width: 520px;
+    background: #161223;
+    border: 2px solid #f2c76b;
+    border-radius: 18px;
+    padding: 28px;
+    color: #f7ead0;
+    text-align: center;
+    box-shadow: 0 0 35px rgba(242, 199, 107, 0.45);
+    position: relative;
+}
+
+.clue-modal-content h2 {
+    margin-top: 0;
+    color: #f2c76b;
+    letter-spacing: 0.12em;
+}
+
+.classified-text {
+    font-family: "Courier New", monospace;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.clue-close {
+    position: absolute;
+    top: 10px;
+    right: 14px;
+    background: none;
+    border: none;
+    color: #f2c76b;
+    font-size: 2rem;
+    cursor: pointer;
 }
 

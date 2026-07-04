@@ -4,7 +4,10 @@
 <script>
     const conStart = new Date("2026-08-14T08:00:00-05:00");
 
-    if (new Date() < conStart) {
+    const params = new URLSearchParams(window.location.search);
+    const bypass = params.has("dev");
+
+    if (new Date() < conStart && !bypass) {
         window.location.href = "teaser.html";
     }
 </script>
@@ -258,6 +261,39 @@
         </div>
     </div>
 
+    <div id="FinalCaseFileModal" class="modal hidden">
+    <div class="modal-content final-case-file">
+        <button id="closeFinalCaseFileModal" class="modal-close">&times;</button>
+
+        <h2>FINAL CASE FILE</h2>
+
+        <div class="classified-stamp">CONFIDENTIAL</div>
+
+        <p>
+            You have reviewed all available transmissions.
+        </p>
+
+        <p>
+            This report represents your official conclusion regarding
+            <strong>The Meeple Among Us.</strong>
+        </p>
+
+        <p class="final-warning">
+            Once submitted, your accusation cannot be changed.
+        </p>
+
+        <div class="modal-actions">
+            <button id="ContinueInvestigationFinalButton">
+                Continue Investigation
+            </button>
+
+            <button id="ConfirmSubmitCaseFileButton" class="danger-button">
+                Submit Case File
+            </button>
+        </div>
+    </div>
+</div>
+
                
 
 
@@ -272,8 +308,12 @@
             class="submit-button"
             disabled>
         
-            Submit Investigation
+            Close Investigation
 
+        </button>
+
+        <button id="finalGuessButton" class="submit-button" disabled>
+            Submit Case File
         </button>
     </div>
 

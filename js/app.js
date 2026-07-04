@@ -68,6 +68,21 @@ document.getElementById("ResetConfirmationX")
 document.getElementById("EncryptedTransmissionModal")
     .addEventListener("click", closeEncryptedTransmissionModal);
 
+document
+    .getElementById("finalGuessButton")
+    .addEventListener("click", openFinalCaseFileModal);
+
+document
+    .getElementById("closeFinalCaseFileModal")
+    .addEventListener("click", closeFinalCaseFileModal);
+
+document
+    .getElementById("ContinueInvestigationFinalButton")
+    .addEventListener("click", closeFinalCaseFileModal);
+
+document
+    .getElementById("ConfirmSubmitCaseFileButton")
+    .addEventListener("click", submitFinalCaseFile);
 
 
 //------------------------------------
@@ -260,31 +275,50 @@ function updateBingoStatus(card, completedSquares) {
     updateSubmissionPanel(completedBingos.length);
 
     updateRiddleUnlocks(card, completedBingos.length);
+    updateFinalGuessButton(card, completedSquares);
 }
 
 function updateSubmissionPanel(bingoCount) {
     const submissionPanel = document.getElementById("submissionPanel");
     const submissionStatus = document.getElementById("submissionStatus");
-    const submitButton = document.getElementById("submitInvestigationButton");
+    const closeButton = document.getElementById("submitInvestigationButton");
+    const submitCaseFileButton = document.getElementById("finalGuessButton");
 
-    if (!submissionPanel || !submissionStatus || !submitButton) {
+    if (!submissionPanel || !submissionStatus || !closeButton || !submitCaseFileButton) {
         return;
     }
 
-    if (bingoCount >= 1) {
-        submissionPanel.classList.remove("locked");
-        submitButton.disabled = false;
+    const openedTransmissions = loadOpenedTransmissions();
 
+    const closeInvestigationUnlocked = bingoCount >= 1;
+
+    const submitCaseFileUnlocked = 
+        openedTransmissions.length >= 3;
+    
+    // Optional later blackout requirement: 
+    // const blackoutComplete = completedSquares.Length === card.flat().filter(square => square.kind !== "riddle").Length;
+    // const submitCaseFileUnlock = openedTransmissions.Length >= 3 && blackoutComplete;
+
+    if (!closeInvestigationUnlocked) {
+        closeButton.disabled = true;
+        submitCaseFileButton.disabled = true;
+        submissionStatus.innerHTML = 
+        "🔒 Complete one BINGO to become eligible for the Daily Prize Drawing.";
+        
+    } else if (!submitCaseFileUnlocked) {
+        closeButton.disabled = false;
+        submitCaseFileButton.disabled = true;
         submissionStatus.innerHTML =
-            "📨 You are eligible for today's Daily Prize Drawing.<br>Submitting ends your investigation.";
+        "📨 You are eligible for today's Daily Prize Drawing.<br>Closing Investigation ends your case. <br><br>🔒 Finish all transmissions to Submit your Case File and answer: Who is the Meeple Among Us?";
     } else {
-        submissionPanel.classList.add("locked");
-        submitButton.disabled = true;
+        closeButton.disabled = false;
+        submitCaseFileButton.disabled = false;
 
-        submissionStatus.innerHTML =
-            "🔒 Complete one BINGO to become eligible for the Daily Prize Drawing.";
+        submissionStatus.innerHTML = 
+         "📨 You are eligible for today's Daily Prize Drawing.<br>Closing Investigation ends your case.<br><br>🕵️ All transmissions reviewed. You may now Submit your Case File.";
+        
     }
-}
+    }
 
 function updateRiddleUnlocks(card, bingoCount) {
     const openedTransmissions = loadOpenedTransmissions();
@@ -386,12 +420,18 @@ function openTransmissionForm() {
 
     saveOpenedTransmissions(openedTransmissions);
 
+    updateFinalGuessButton();
+
     window.open(activeTransmissionUrl, "_blank");
 
     closeTransmissionModal();
 
     loadBingoCard();
+    
+    
 }
+
+
 
 function setDetectiveStatus(line1, line2) {
     document.getElementById("detectiveStatus").innerHTML = 
@@ -412,6 +452,58 @@ function getDetectiveRank(openedCount) {
     }
 
     return "Rookie Detective";
+}
+
+function updateFinalGuessButton() {
+    const finalGuessButton = document.getElementById("finalGuessButton");
+
+    if (!finalGuessButton) {
+        return;
+    }
+
+    const openedTransmissions = loadOpenedTransmissions();
+
+    const allTransmissionsOpened = 
+        openedTransmissions.length >= 3;
+
+    // Optional later requirement:
+    // const blackoutComplete = 
+    // completedSquares.length === card.flat().filter(square => square.kind !== "riddle").length;
+
+    const canCloseInvestigation =
+        allTransmissionsOpened;
+        // && blackoutComplete;
+
+    if (canCloseInvestigation) {
+        finalGuessButton.classList.remove("hidden");
+        finalGuessButton.disabled = false;
+    } else {
+        finalGuessButton.classList.add("hidden");
+        finalGuessButton.disabled = true;
+    }
+}
+
+const FINAL_CASEFILE_URL = "https://forms.gle/78MMwpvgkFumrZSP8";
+
+function openFinalCaseFileModal() {
+    document
+        .getElementById("FinalCaseFileModal")
+        .classList.remove("hidden");
+}
+
+function closeFinalCaseFileModal() {
+    document
+        .getElementById("FinalCaseFileModal")
+        .classList.add("hidden");
+}
+
+function submitFinalCaseFile() {
+    closeFinalCaseFileModal();
+
+    window.open(
+        FINAL_CASEFILE_URL,
+        "_blank"
+    );
 }
 
 //------------------------------------

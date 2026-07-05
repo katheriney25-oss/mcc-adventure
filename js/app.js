@@ -7,6 +7,7 @@ const TRANSMISSION_KEY = "mccOpenedTransmissions2026";
 const HQ_PROMOTION_KEY = "mccHQPromotionShown2026";
 const SUBMIT_CASEFILE_URL = "https://forms.gle/y8nqQ38iVrcWTXCc9";
 const UNLOCK_ANIMATION_KEY = "mccUnlockAnimationsShown2026";
+const CASE_FILE_REVIEW_KEY = "mccCaseFileReview2026";
 
 //------------------------------------
 // Startup
@@ -15,6 +16,7 @@ const UNLOCK_ANIMATION_KEY = "mccUnlockAnimationsShown2026";
 
 document.addEventListener("DOMContentLoaded", () => {
     loadBingoCard();
+    renderCaseFileReview();
 });
 
 document.getElementById("closeModal").addEventListener("click", closeTransmissionModal);
@@ -82,6 +84,14 @@ document
 document
     .getElementById("ConfirmSubmitCaseFileButton")
     .addEventListener("click", submitFinalCaseFile);
+
+document
+    .getElementById("closeRiddleModal")
+    .addEventListener("click", closeRiddleModal);
+
+document
+    .getElementById("submitRiddleAnswerButton")
+    .addEventListener("click", submitRiddleAnswer);
 
 
 //------------------------------------
@@ -389,10 +399,14 @@ function updateRiddleUnlocks(card, bingoCount) {
 
 let activeTransmissionUrl = "";
 let activeTransmissionId = null;
+let activeTransmissionData = null;
+let selectedRiddleChoice = null;
+let activeRiddleSquareData = null;
 
 function showTransmissionModal(squareData) {
     activeTransmissionUrl = squareData.formUrl;
     activeTransmissionId = squareData.id;
+    activeTransmissionData = squareData;
 
     setDetectiveStatus("Transmission", "Located");
 
@@ -400,7 +414,7 @@ function showTransmissionModal(squareData) {
         `Transmission #${squareData.unlock.riddle} Decrypted`;
 
     document.getElementById("modalMessage").textContent =
-        "You have earned access to a classified message. Open the secure form to submit your answer.";
+        "You have earned access to a classified message. Review the transmission and submit your finding.";
 
     document.getElementById("transmissionModal").classList.remove("hidden");
 }
@@ -422,13 +436,112 @@ function openTransmissionForm() {
 
     updateFinalGuessButton();
 
-    window.open(activeTransmissionUrl, "_blank");
-
     closeTransmissionModal();
 
     loadBingoCard();
+
+    openRiddleModal(activeTransmissionData);
     
     
+}
+
+function openRiddleModal(squareData) {
+
+    const transmission = squareData.transmission;
+    activeRiddleSquareData = squareData;
+
+    selectedRiddleChoice = null;
+
+    document.getElementById("submitRiddleAnswerButton").disabled = true;
+
+    document.getElementById("riddleModalTitle").textContent =
+        transmission.title;
+
+    document.getElementById("riddleModalIntro").textContent =
+        transmission.intro;
+
+    document.getElementById("riddleQuestion").innerHTML =`
+        <div class="classified-label">CLASSIFIED</div>
+        <div class="classified-question">${transmission.question}</div>
+    `;
+
+    const choicesDiv = document.getElementById("riddleChoices");
+    choicesDiv.innerHTML = "";
+
+    transmission.choices.forEach(choice => {
+
+        const button = document.createElement("button");
+
+        button.className = "riddle-choice-button";
+        button.textContent = choice.text;
+
+        button.addEventListener("click", () => {
+
+            document
+                .querySelectorAll(".riddle-choice-button")
+                .forEach(btn => btn.classList.remove("selected"));
+
+            button.classList.add("selected");
+
+            selectedRiddleChoice = choice;
+
+            document.getElementById(
+                "submitRiddleAnswerButton"
+            ).disabled = false;
+
+        });
+
+        choicesDiv.appendChild(button);
+
+    });
+
+    document
+        .getElementById("riddleModal")
+        .classList.remove("hidden");
+
+}
+
+function closeRiddleModal() {
+
+    document
+        .getElementById("riddleModal")
+        .classList.add("hidden");
+
+}
+
+function submitRiddleAnswer() {
+    if (!activeRiddleSquareData || !selectedRiddleChoice) {
+        return;
+    }
+
+    const transmission = activeRiddleSquareData.transmission;
+    const isCorrect = selectedRiddleChoice.isCorrect;
+
+    const clue = isCorrect
+        ? transmission.clues.correct
+        : transmission.clues.incorrect;
+
+    saveRiddleResult(
+        activeRiddleSquareData.id,
+        {
+            riddleId: activeRiddleSquareData.id,
+            riddleNumber: activeRiddleSquareData.unlock.riddle,
+            answer: selectedRiddleChoice.text,
+            correct: isCorrect,
+            clue: clue
+        }
+    );
+
+    closeRiddleModal();
+
+    setDetectiveStatus(
+        isCorrect ? "Full" : "Partial",
+        "Decryption"
+    );
+
+    renderCaseFileReview();
+
+    loadBingoCard();
 }
 
 
@@ -514,6 +627,87 @@ function updateCaseFileCodePanel() {
         panel.classList.add("hidden");
     }
 }
+function saveRiddleResult(riddleId, result) {
+
+    const review = loadRiddleResults();
+
+    review[riddleId] = result;
+
+    localStorage.setItem(
+        CASE_FILE_REVIEW_KEY,
+        JSON.stringify(review)
+    );
+
+    renderCaseFileReview();
+}
+
+function loadRiddleResults() {
+
+    const saved = localStorage.getItem(CASE_FILE_REVIEW_KEY);
+
+    if (!saved) {
+        return {};
+    }
+
+    return JSON.parse(saved);
+}
+
+function renderCaseFileReview() {
+
+    const panel = document.getElementById("caseFileReviewPanel");
+    const list = document.getElementById("caseFileReviewList");
+
+    const review = loadRiddleResults();
+
+    list.innerHTML = "";
+
+    const entries = Object.values(review);
+
+    if (entries.length === 0) {
+
+        panel.classList.add("hidden");
+        return;
+    }
+
+    panel.classList.remove("hidden");
+
+    entries.forEach(entry => {
+
+        const card = document.createElement("div");
+        card.className = "case-file-entry";
+
+        card.innerHTML = `
+            <h3>Transmission #${entry.riddleNumber}</h3>
+
+            <p>
+                <strong>Findings Submitted:</strong>
+                ${entry.answer}
+            </p>
+
+            <p class="case-file-status ${entry.correct ? "correct" : "incorrect"}">
+                ${entry.correct ? "🔓 HQ Assessment: FULL DECRYPTION" : "🔒 HQ Assessment: PARTIAL DECRYPTION"}
+            </p>
+
+            <div class="case-file-clue">
+
+                <strong>${entry.clue.title}</strong>
+
+                ${entry.clue.body
+                    .map(line => `<p>${line}</p>`)
+                    .join("")}
+
+            </div>
+        `;
+
+        list.appendChild(card);
+
+    });
+
+}
+
+
+
+
 
 //------------------------------------
 // Event Handlers
@@ -624,6 +818,7 @@ function confirmResetCard() {
     localStorage.removeItem(STORAGE_KEY);
     localStorage.removeItem(TRANSMISSION_KEY);
     localStorage.removeItem(UNLOCK_ANIMATION_KEY);
+    localStorage.removeItem(CASE_FILE_REVIEW_KEY);
 
     // DEVELOPMENT ONLY
     // Remove before MoonCityCon 2026.

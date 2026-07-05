@@ -275,6 +275,26 @@
         </div>
     </div>
 
+    <div id="riddleModal" class="modal hidden">
+    <div class="modal-content riddle-modal-content">
+        <button id="closeRiddleModal" class="modal-close">x</button>
+
+        <div class="modal-icon">🔍</div>
+
+        <h2 id="riddleModalTitle">Transmission</h2>
+
+        <p id="riddleModalIntro"></p>
+
+        <div id="riddleQuestion" class="riddle-question"></div>
+
+        <div id="riddleChoices" class="riddle-choices"></div>
+
+        <button id="submitRiddleAnswerButton" class="hq-modal-button" disabled>
+            Submit Finding
+        </button>
+    </div>
+</div>
+
     <div id="ResetConfirmationModal" class="modal hidden">
         <div class="modal-content resetconfirmation-modal-content">
             
@@ -357,6 +377,16 @@
             Submit Case File
         </button>
     </div>
+
+    <section id="caseFileReviewPanel" class="case-file-review-panel hidden">
+    <h2>📁 Case File Review</h2>
+
+    <div id="caseFileReviewList">
+        <!-- Riddle results will be added here by JS -->
+    </div>
+    </section>
+
+
 
     <script src="js/app.js"></script>
 

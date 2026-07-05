@@ -127,16 +127,57 @@
 
       {
         "id": 10,
-        "text": "MCC 2026 Riddle #3",
+        "text": "Encrypted Transmission",
         "kind": "riddle",
         "icon": "🔒",
         "unlocksOn": 3,
-        "formUrl": "https://forms.gle/B8L7TeW35ddkR2PT8",
         "unlock": {
             "riddle": 3
+        },
+        "transmission": {
+          "title": "Transmission #3",
+          "intro": "HQ has intercepted a signal. Review the documentation and submit your findings.",
+          "question": "PLACEHOLDER RIDDLE QUESTION 3",
+          "choices": [
+            {
+              "id": "a", 
+              "text": "Placeholder Answer A",
+              "isCorrect": false
+            },
+            {
+              "id": "b", 
+              "text": "Placeholder Answer B",
+              "isCorrect": true
+            },
+            {
+              "id": "c", 
+              "text": "Placeholder Answer C",
+              "isCorrect": false
+            },
+            {
+              "id": "d", 
+              "text": "Placeholder Answer D",
+              "isCorrect": false
+            }           
+          ],
+          "clues": {
+            "correct": {
+              "title": "Full Decryption",
+              "body": [
+                "PLACEHOLDER SPECIFIC CLUE #3",
+                "This is the clue shown when the detective selects the correct answer."
+              ]
+            }, 
+            "incorrect": {
+              "title": "Partial Decryption",
+              "body": [
+                "PLACEHOLDER VAGUE CLUE #3",
+                "This is the clue shown when the detective selects an incorrect answer."
+              ]
+            }
+          }
         }
       }
-
     ],
 
     [
@@ -168,13 +209,55 @@
 
       {
         "id": 13,
-        "text": "MCC 2026 Riddle #1",
+        "text": "Encrypted Transmission",
         "kind": "riddle",
         "icon": "🔒",
         "unlocksOn": 1,
-        "formUrl": "https://forms.gle/oHHYGRiTZy1AHTyB7",
         "unlock": {
             "riddle": 1
+        },
+        "transmission": {
+          "title": "Transmission #1",
+          "intro": "HQ has intercepted a signal. Review the documentation and submit your findings.",
+          "question": "PLACEHOLDER RIDDLE QUESTION 1",
+          "choices": [
+            {
+              "id": "a", 
+              "text": "Placeholder Answer A",
+              "isCorrect": false
+            },
+            {
+              "id": "b", 
+              "text": "Placeholder Answer B",
+              "isCorrect": true
+            },
+            {
+              "id": "c", 
+              "text": "Placeholder Answer C",
+              "isCorrect": false
+            },
+            {
+              "id": "d", 
+              "text": "Placeholder Answer D",
+              "isCorrect": false
+            }           
+          ],
+          "clues": {
+            "correct": {
+              "title": "Full Decryption",
+              "body": [
+                "PLACEHOLDER SPECIFIC CLUE #1",
+                "This is the clue shown when the detective selects the correct answer."
+              ]
+            }, 
+            "incorrect": {
+              "title": "Partial Decryption",
+              "body": [
+                "PLACEHOLDER VAGUE CLUE #1",
+                "This is the clue shown when the detective selects an incorrect answer."
+              ]
+            }
+          }
         }
       },
 
@@ -315,13 +398,55 @@
 
       {
         "id": 24,
-        "text": "MCC 2026 Riddle #2",
+        "text": "Encrypted Transmission",
         "kind": "riddle",
         "icon": "🔒",
         "unlocksOn": 2,
-        "formUrl": "https://forms.gle/QJozRJwDKvFqRfBE8",
         "unlock": {
             "riddle": 2
+        },
+        "transmission": {
+          "title": "Transmission #2",
+          "intro": "HQ has intercepted a signal. Review the documentation and submit your findings.",
+          "question": "PLACEHOLDER RIDDLE QUESTION 2",
+          "choices": [
+            {
+              "id": "a", 
+              "text": "Placeholder Answer A",
+              "isCorrect": false
+            },
+            {
+              "id": "b", 
+              "text": "Placeholder Answer B",
+              "isCorrect": true
+            },
+            {
+              "id": "c", 
+              "text": "Placeholder Answer C",
+              "isCorrect": false
+            },
+            {
+              "id": "d", 
+              "text": "Placeholder Answer D",
+              "isCorrect": false
+            }           
+          ],
+          "clues": {
+            "correct": {
+              "title": "Full Decryption",
+              "body": [
+                "PLACEHOLDER SPECIFIC CLUE #2",
+                "This is the clue shown when the detective selects the correct answer."
+              ]
+            }, 
+            "incorrect": {
+              "title": "Partial Decryption",
+              "body": [
+                "PLACEHOLDER VAGUE CLUE #2",
+                "This is the clue shown when the detective selects an incorrect answer."
+              ]
+            }
+          }
         }
       },
 

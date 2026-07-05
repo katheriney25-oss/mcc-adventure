@@ -621,6 +621,104 @@ h2{
         transform: translateY(0) rotate(0deg);
     }
 }
+
+.case-file-review-panel {
+    margin: 18px auto 32px;
+    padding: 18px;
+    max-width: 760px;
+    background: rgba(20, 28, 38, 0.95);
+    border: 2px solid #caa94d;
+    border-radius: 14px;
+    color: #f7f2e8;
+}
+
+.case-file-review-panel h2 {
+    margin-top: 0;
+    text-align: center;
+}
+
+.case-file-entry {
+    margin-top: 14px;
+    padding: 14px;
+    border: 1px solid #caa94d;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.case-file-entry h3 {
+    margin-top: 0;
+}
+
+.case-file-entry p {
+    margin: 8px 0;
+}
+
+.case-file-clue {
+    margin-top: 10px;
+    padding: 12px;
+    border-left: 4px solid #caa94d;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.case-file-status.correct {
+    color: #9be28f;
+    font-weight: bold;
+}
+
+.case-file-status.incorrect {
+    color: #f5c26b;
+    font-weight: bold;
+}
+
+.riddle-modal-content {
+    max-width: 650px;
+}
+
+.riddle-question {
+    margin: 18px 0;
+    padding: 14px;
+    border-left: 4px solid #caa94d;
+    background: rgba(0, 0, 0, 0.15);
+    line-height: 1.5;
+}
+
+.riddle-choices {
+    display: grid;
+    gap: 10px;
+    margin: 16px 0;
+}
+
+.riddle-choice-button {
+    padding: 12px;
+    border: 2px solid #caa94d;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.08);
+    color: inherit;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.riddle-choice-button.selected {
+    background: #caa94d;
+    color: #23303b;
+}
+
+.riddle-choice-button:hover {
+    background: rgba(202, 169, 77, 0.35);
+}
+
+.classified-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    color: #caa94d;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.classified-question {
+    font-weight: bold;
+    line-height: 1.4;
+}
 /*==================================================
     TEASER PAGE - MISSION CONTROL
 ==================================================*/

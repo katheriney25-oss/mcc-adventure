@@ -56,9 +56,31 @@
                 Detective's Guide to the Investigation
             </button>
 
-        </section>
 
-    </header>
+
+    <section id="caseFileCodePanel" class="case-file-code-panel hidden">
+        <h3>🔐 HQ Secure Terminal</h1>
+    <label for="caseFileCodeInput">
+        Case File Code:
+    </label>
+
+    <div class="case-file-code-row">
+        <input
+            id="caseFileCodeInput"
+            type="text"
+            placeholder="Example: PTW-TRACE"
+            autocomplete="off"
+        >
+
+        <button id="submitCaseFileCodeButton">
+            Decrypt
+        </button>
+    </div>
+    </section>
+
+    </section>
+
+</header>
 
     <section class="bingo-card" id="bingoCard"></section>
 
@@ -218,6 +240,25 @@
 
     </div>
 </div>
+
+<div id="caseFileClueModal" class="modal hidden">
+    <div class="modal-content casefile-clue-modal-content">
+        <button id="closeCaseFileClueModal" class="modal-close">x</button>
+
+        <div class="modal-icon" id="caseFileClueIcon">📨</div>
+
+        <h2 id="caseFileClueTitle">Case File Transmission</h2>
+
+        <div id="caseFileClueBody">
+            Transmission loading...
+        </div>
+
+        <button id="closeCaseFileClueButton" class="hq-modal-button">
+            Return to Investigation
+        </button>
+    </div>
+</div>
+
 
     <div id="EncryptedTransmissionModal" class="modal hidden">
         <div class="modal-content encryptedtransmission-modal-content">

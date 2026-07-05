@@ -730,6 +730,10 @@ body.teaser {
     font-size: 1.05rem;
 }
 
+.hidden {
+    display: none !important;
+}
+
 /* Mobile polish */
 @media (max-width: 600px) {
     .missionControl {
@@ -743,6 +747,19 @@ body.teaser {
         padding: 16px;
         border-radius: 14px;
     }
+}
+
+.casefile-clue-modal-content {
+    max-width: 620px;
+}
+
+#caseFileClueBody {
+    text-align: left;
+    line-height: 1.5;
+}
+
+#caseFileClueBody p {
+    margin-bottom: 12px;
 }
 
 /*==================================================
@@ -846,3 +863,61 @@ body.teaser {
     cursor: pointer;
 }
 
+.case-file-code-panel {
+    margin: 12px auto;
+    padding: 14px 18px;
+    max-width: 600px;
+
+    background: #23303b;
+    border: 2px solid #caa94d;
+    border-radius: 12px;
+
+    text-align: center;
+    color: #f7f2e8;
+
+    box-shadow: 0 3px 8px rgba(0,0,0,.25);
+}
+
+.case-file-code-panel label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.case-file-code-row {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.case-file-code-row input {
+    flex: 1;
+    min-width: 220px;
+    max-width: 300px;
+
+    padding: 10px;
+
+    border: 2px solid #caa94d;
+    border-radius: 6px;
+
+    font-size: 1rem;
+    text-transform: uppercase;
+}
+
+.case-file-code-row button {
+    padding: 10px 18px;
+
+    border: none;
+    border-radius: 6px;
+
+    background: #caa94d;
+    color: #23303b;
+
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.case-file-code-row button:hover {
+    background: #e0be5b;
+}

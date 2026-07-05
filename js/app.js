@@ -6,7 +6,7 @@ const STORAGE_KEY = "mccAdventureProgress2026";
 const TRANSMISSION_KEY = "mccOpenedTransmissions2026";
 const HQ_PROMOTION_KEY = "mccHQPromotionShown2026";
 const SUBMIT_CASEFILE_URL = "https://forms.gle/y8nqQ38iVrcWTXCc9";
-const UNLOCK_ANIMATION_KEY = "mccUnlockAnimationsShown2026"
+const UNLOCK_ANIMATION_KEY = "mccUnlockAnimationsShown2026";
 
 //------------------------------------
 // Startup
@@ -37,11 +37,11 @@ document
 
 document
     .getElementById("closeHQPromotionModal")
-    .addEventListener("click", closeHQPromotionModal)
+    .addEventListener("click", closeHQPromotionModal);
 
 document
     .getElementById("submitInvestigationButton")
-    .addEventListener("click", openSubmitConfirmationModal)
+    .addEventListener("click", openSubmitConfirmationModal);
 
 document.getElementById("SubmitInvestigationButtonModal")
     .addEventListener("click", beginCaseFileSubmission);
@@ -55,7 +55,6 @@ document.getElementById("close-submitconfirmationmodal")
 document.getElementById("KeepContinueButton")
     .addEventListener("click", continueInvestigationAgain);
 
-//continueInvestigation will be replaced when function to open Google Form is completed
 document.getElementById("FinalSubmitButtonModal")
     .addEventListener("click", submitCaseFile);
 
@@ -108,7 +107,7 @@ async function loadBingoCard() {
 function buildBingoCard(data) {
     const bingoCard = document.getElementById("bingoCard");
     const completedSquares = loadProgress();
-    const openedTransmissions = loadOpenedTransmissions();
+    
 
     bingoCard.innerHTML = "";
 
@@ -273,9 +272,10 @@ function updateBingoStatus(card, completedSquares) {
     Rank: ${rank}`;
 
     updateSubmissionPanel(completedBingos.length);
+    updateCaseFileCodePanel();
 
     updateRiddleUnlocks(card, completedBingos.length);
-    updateFinalGuessButton(card, completedSquares);
+    updateFinalGuessButton();
 }
 
 function updateSubmissionPanel(bingoCount) {
@@ -311,11 +311,11 @@ function updateSubmissionPanel(bingoCount) {
         submissionStatus.innerHTML =
         "📨 You are eligible for today's Daily Prize Drawing.<br>Closing Investigation ends your case. <br><br>🔒 Finish all transmissions to Submit your Case File and answer: Who is the Meeple Among Us?";
     } else {
-        closeButton.disabled = false;
+        closeButton.disabled = true;
         submitCaseFileButton.disabled = false;
 
         submissionStatus.innerHTML = 
-         "📨 You are eligible for today's Daily Prize Drawing.<br>Closing Investigation ends your case.<br><br>🕵️ All transmissions reviewed. You may now Submit your Case File.";
+         "🕵️ All transmissions reviewed. You may now Submit your Case File.";
         
     }
     }
@@ -475,10 +475,8 @@ function updateFinalGuessButton() {
         // && blackoutComplete;
 
     if (canCloseInvestigation) {
-        finalGuessButton.classList.remove("hidden");
         finalGuessButton.disabled = false;
     } else {
-        finalGuessButton.classList.add("hidden");
         finalGuessButton.disabled = true;
     }
 }
@@ -506,23 +504,23 @@ function submitFinalCaseFile() {
     );
 }
 
+function updateCaseFileCodePanel() {
+    const panel = document.getElementById("caseFileCodePanel");
+    const openedTransmissions = loadOpenedTransmissions();
+
+    if (openedTransmissions.length >= 1) {
+        panel.classList.remove("hidden");
+    } else {
+        panel.classList.add("hidden");
+    }
+}
+
 //------------------------------------
 // Event Handlers
 //------------------------------------
 function resetCard() {
     openResetConfirmationModal();
 }
-
-//    localStorage.removeItem(STORAGE_KEY);
-//    localStorage.removeItem(TRANSMISSION_KEY);
-    // DEVELOPMENT ONLY
-    // Remove before MoonCityCon 2026.
-    // Keeps the HQ Promotion transmission replayable after pressing Reset.
-//  localStorage.removeItem(HQ_PROMOTION_KEY);
-
-//    location.reload();
-
-//}
 
 function openHowToPlayModal() {
 
@@ -591,11 +589,6 @@ function submitCaseFile() {
 
     closeSubmitConfirmationModal();
 
-//    localStorage.setItem(
-//        "caseFileClosed",
-//        "true"
-//    );
-
     window.open(
         SUBMIT_CASEFILE_URL,
         "_blank"
@@ -657,6 +650,9 @@ function animateDetectiveUnlock(onComplete) {
 
     }, 1200);
 }
+
+
+
 
 //------------------------------------
 // Utility Functions

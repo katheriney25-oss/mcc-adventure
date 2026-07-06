@@ -526,6 +526,7 @@ function submitRiddleAnswer() {
         {
             riddleId: activeRiddleSquareData.id,
             riddleNumber: activeRiddleSquareData.unlock.riddle,
+            reviewOrder: activeRiddleSquareData.unlock.riddle,
             answer: selectedRiddleChoice.text,
             correct: isCorrect,
             clue: clue
@@ -661,7 +662,9 @@ function renderCaseFileReview() {
 
     list.innerHTML = "";
 
-    const entries = Object.values(review);
+    const entries = Object.values(review).sort((a,b) => {
+        return a.reviewOrder - b.reviewOrder;
+    });
 
     if (entries.length === 0) {
 

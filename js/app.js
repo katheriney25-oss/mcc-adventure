@@ -282,7 +282,7 @@ function updateBingoStatus(card, completedSquares) {
     Rank: ${rank}`;
 
     updateSubmissionPanel(completedBingos.length);
-    updateCaseFileCodePanel();
+    // updateCaseFileCodePanel();
 
     updateRiddleUnlocks(card, completedBingos.length);
     updateFinalGuessButton();
@@ -617,16 +617,16 @@ function submitFinalCaseFile() {
     );
 }
 
-function updateCaseFileCodePanel() {
-    const panel = document.getElementById("caseFileCodePanel");
-    const openedTransmissions = loadOpenedTransmissions();
+// function updateCaseFileCodePanel() {
+//     const panel = document.getElementById("caseFileCodePanel");
+//     const openedTransmissions = loadOpenedTransmissions();
 
-    if (openedTransmissions.length >= 1) {
-        panel.classList.remove("hidden");
-    } else {
-        panel.classList.add("hidden");
-    }
-}
+//     if (openedTransmissions.length >= 1) {
+//         panel.classList.remove("hidden");
+//     } else {
+//         panel.classList.add("hidden");
+//     }
+// }
 function saveRiddleResult(riddleId, result) {
 
     const review = loadRiddleResults();

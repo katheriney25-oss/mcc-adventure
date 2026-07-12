@@ -137,26 +137,26 @@
         "transmission": {
           "title": "Transmission #3",
           "intro": "HQ has intercepted a signal. Review the documentation and submit your findings.",
-          "question": "PLACEHOLDER RIDDLE QUESTION 3",
+          "question": "A farmer has 17 sheep. All but 9 die. How many are left?",
           "choices": [
             {
               "id": "a", 
-              "text": "Placeholder Answer A",
+              "text": "8",
               "isCorrect": false
             },
             {
               "id": "b", 
-              "text": "Placeholder Answer B",
-              "isCorrect": true
-            },
-            {
-              "id": "c", 
-              "text": "Placeholder Answer C",
+              "text": "17",
               "isCorrect": false
             },
             {
+              "id": "c", 
+              "text": "9",
+              "isCorrect": true
+            },
+            {
               "id": "d", 
-              "text": "Placeholder Answer D",
+              "text": "None",
               "isCorrect": false
             }           
           ],
@@ -164,15 +164,15 @@
             "correct": {
               "title": "Full Decryption",
               "body": [
-                "PLACEHOLDER SPECIFIC CLUE #3",
-                "This is the clue shown when the detective selects the correct answer."
+                "All but 9 of the farmer's sheep die.",
+                "We searched the records. We followed the evidence. In the end, only one clue remained...Lightning never strikes at random."
               ]
             }, 
             "incorrect": {
               "title": "Partial Decryption",
               "body": [
-                "PLACEHOLDER VAGUE CLUE #3",
-                "This is the clue shown when the detective selects an incorrect answer."
+                "All but 9 of the farmer's sheep die.",
+                "The remaining suspects share too much in common. Fortunately, only one bears the mark of the storm."
               ]
             }
           }
@@ -219,42 +219,42 @@
         "transmission": {
           "title": "Transmission #1",
           "intro": "HQ has intercepted a signal. Review the documentation and submit your findings.",
-          "question": "PLACEHOLDER RIDDLE QUESTION 1",
+          "question": "A detective enters a room. The window is open. The curtains are blowing. Papers are everywhere. What is the strongest evidence of a break-in?",
           "choices": [
             {
               "id": "a", 
-              "text": "Placeholder Answer A",
+              "text": "The window",
               "isCorrect": false
             },
             {
               "id": "b", 
-              "text": "Placeholder Answer B",
-              "isCorrect": true
+              "text": "The curtains",
+              "isCorrect": false
             },
             {
               "id": "c", 
-              "text": "Placeholder Answer C",
+              "text": "The Papers",
               "isCorrect": false
             },
             {
               "id": "d", 
-              "text": "Placeholder Answer D",
-              "isCorrect": false
+              "text": "Nothing, more evidence is needed",
+              "isCorrect": true
             }           
           ],
           "clues": {
             "correct": {
               "title": "Full Decryption",
               "body": [
-                "PLACEHOLDER SPECIFIC CLUE #1",
-                "This is the clue shown when the detective selects the correct answer."
-              ]
+                "What evidence is there of a break-in?",
+                "HQ has identified the source material of all the organizers' recommendations. Search the convention's 'do the thing to win the thing' archive. Somewhere among those recrods is teh evidence you will need to find the meeple (who is among us!)."
+            ]
             }, 
             "incorrect": {
               "title": "Partial Decryption",
               "body": [
-                "PLACEHOLDER VAGUE CLUE #1",
-                "This is the clue shown when the detective selects an incorrect answer."
+                "What evidence is there of a break-in?",
+                "The suspected mepple didn't hide any evidence in plain sight. HQ suspects it was hidden in the organizers' rewards records."
               ]
             }
           }
@@ -408,26 +408,26 @@
         "transmission": {
           "title": "Transmission #2",
           "intro": "HQ has intercepted a signal. Review the documentation and submit your findings.",
-          "question": "PLACEHOLDER RIDDLE QUESTION 2",
+          "question": "Mary's father has five daughters: Nana, Nene, Nini, Nono. What is the name of the fifth daughter?",
           "choices": [
             {
               "id": "a", 
-              "text": "Placeholder Answer A",
+              "text": "Nuna",
               "isCorrect": false
             },
             {
               "id": "b", 
-              "text": "Placeholder Answer B",
+              "text": "Mary",
               "isCorrect": true
             },
             {
               "id": "c", 
-              "text": "Placeholder Answer C",
+              "text": "Nancy",
               "isCorrect": false
             },
             {
               "id": "d", 
-              "text": "Placeholder Answer D",
+              "text": "Nora",
               "isCorrect": false
             }           
           ],
@@ -435,15 +435,15 @@
             "correct": {
               "title": "Full Decryption",
               "body": [
-                "PLACEHOLDER SPECIFIC CLUE #2",
-                "This is the clue shown when the detective selects the correct answer."
+                "Who is the fifth daughter?",
+                "We pursued two false trails. One led us across unexplored frontiers guided by drafted adventure cards. The other vanished beneath ancient boughs where we walked among fairy folk and towering menhirs and where mistletoe grows. Both were convincing. Both were wrong."
               ]
             }, 
             "incorrect": {
               "title": "Partial Decryption",
               "body": [
-                "PLACEHOLDER VAGUE CLUE #2",
-                "This is the clue shown when the detective selects an incorrect answer."
+                "Who is the fifth daughter?",
+                "Not every adventure is worth following. Ignore the call of distant frontiers and the whispers of the old forest."
               ]
             }
           }
